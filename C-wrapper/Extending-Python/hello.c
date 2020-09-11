@@ -10,8 +10,7 @@ static char* hello(char* what);
 static PyObject* hello_wrapper(PyObject* self, PyObject* args)
 {
   char* input;
-  char* result;
-  PyObject* ret;
+  
 
   // parse arguments
   if (!PyArg_ParseTuple(args, "s", &input)) {
@@ -19,17 +18,14 @@ static PyObject* hello_wrapper(PyObject* self, PyObject* args)
   }
 
   // run the actual function
-  result = hello(input);
+  hello(input);
+  
 
-  // build the resulting string into a Python object.
-  ret = PyString_FromString(result);
-  free(result);
-
-  return ret;
+  return Py_None;
 }
 
-static char* hello(PyObject* self, char* what){
-  printf('Hello ');
+static char* hello(char* what){
+   printf("Hello %s", what);
 }
 
 
